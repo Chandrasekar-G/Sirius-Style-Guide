@@ -98,7 +98,7 @@ var $products = $(".products");         // FAST
 
 3.3 Give a context to your selectors. By default, when you pass a selector into jQuery, it traverses the entire DOM. There’s an underused,
 second possible context argument into jQuery that limits that search to a specifi c section of the
-DOM. In fact, the best way is to use .find(). Its faster than the context by 40% <sup id="3.3">[8]("#3.3")</sup>
+DOM. In fact, the best way is to use .find(). Its faster than the context by 40% <sup id="3.3">[8](#f3.3)</sup>
 
 
 ```js
@@ -107,6 +107,7 @@ $(".className","#id")           // FASTER
 $("#id").find(".className")     // FASTEST
 ```
 
+3.4 Avoid excess specificity and usage of universal selectors.
 
 ## References
 
@@ -120,8 +121,8 @@ $("#id").find(".className")     // FASTEST
 
 <b id="f2.3">5. </b>[ Append outside the loop](http://learn.jquery.com/performance/append-outside-loop/) [↩](#2.3)
 
-<b id="f3.1">6. </b>[ Performance Comparison of ID and other Selector](https://jsperf.com/book-selector-tests)
+<b id="f3.1">6. </b>[ Performance Comparison of ID and other Selector](https://jsperf.com/book-selector-tests) [↩](#3.1)
 
-<b id="f3.2">7. </b>[ Performance Comparison of class selectors](https://jsperf.com/jquery-selector-comparison-123)
+<b id="f3.2">7. </b>[ Performance Comparison of class selectors](https://jsperf.com/jquery-selector-comparison-123) [↩](#3.2)
 
-<b id="f3.3">8. </b>[ Find  vs Context](https://jsperf.com/jquery-find-vs-context-2/13)
+<b id="f3.3">8. </b>[ Find  vs Context](https://jsperf.com/jquery-find-vs-context-2/13) [↩](#3.3)
