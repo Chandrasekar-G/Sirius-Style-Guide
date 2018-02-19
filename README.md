@@ -14,7 +14,7 @@ TODO
 ```js
 var firstName;
 ```
-1.2 Prefix the variables which reference jQuery Objects with a $. This will be helpful to differentiate it with other JS variables.
+1.2 Prefix the variables which reference jQuery Objects with a $. This will be helpful to differentiate it with other plain JS variables.
 ```js
 var $dialogBox = $("#dialog-box");
 ```
@@ -32,20 +32,20 @@ But keep in mind that its better to query and use the element directly in single
 
 <b>Bad</b>
 ```js
-    $("#dialog-box").addClass("centre");
-    $("#dialog-box").css("color","red");
-    $("#dialog-box").height("100px");
-    $("#dialog-box").show();
+$("#dialog-box").addClass("centre");
+$("#dialog-box").css("color","red");
+$("#dialog-box").height("100px");
+$("#dialog-box").show();
 ```
 
 <b>Good</b>
 ```js
-    var $dialogBox = $("#dialog-box");
+var $dialogBox = $("#dialog-box");
 
-    $dialogBox.addClass("centre")
-            .css("color", "red")
-            .height("100px")
-            .show();
+$dialogBox.addClass("centre")
+        .css("color", "red")
+        .height("100px")
+        .show();
 ```
 
 2.2 Detcah DOM elements if you are planning to perform complex manipulations. DOM manipulations are slow when compared to ordinart program execution. So, its a better option to detach the DOM element while we work with it and re-attach it after our manipulations<sup id="2.2">[4](#f2.2)</sup>.
@@ -59,6 +59,55 @@ $table.detach();
  
 $parent.append($table);
 ```
+
+2.3 In cases where you're appending a lot of elements to the Dom, append them all at once instead of one at a time because touching the Dom comes at a cost<sup id="2.3">[5](#f2.3)</sup>.
+
+<b>Bad</b>
+```js
+var $userList = $("#user-list"),
+    users = ["Greg", "Peter", "Kyle", "Danny", "Mark"];
+
+$.each(users, function(user) {
+    $userList.append("<li>" + user + "</li>");
+});
+
+```
+<b>Good</b>
+```js
+var $userList = $("#user-list"),
+    users = ["Greg", "Peter", "Kyle", "Danny", "Mark"],
+    userDom = "";
+
+$.each(users, function(user) {
+    userDom += "<li>" + user + "</li>";
+});
+
+$userList.append(userDom);
+
+```
+
+### 3. Selectors
+
+3.1 Leveraging IDs is by far the fastest way to select an element<sup id="3.1">[6](#f3.1)</sup>. Though its not possible in all the cases, its preferable to use them when you can.
+
+3.2 When using class selectors don't use the element type since, it'll slow down the selection<sup id="3.2">[7](#f3.2)</sup>.
+```js
+var $products = $("div.products");      // SLOW
+var $products = $(".products");         // FAST
+```
+
+3.3 Give a context to your selectors. By default, when you pass a selector into jQuery, it traverses the entire DOM. There’s an underused,
+second possible context argument into jQuery that limits that search to a specifi c section of the
+DOM. In fact, the best way is to use .find(). Its faster than the context by 40% <sup id="3.3">[8]("#3.3")</sup>
+
+
+```js
+$(".className");                // SLOW :: This traverses the whole DOM
+$(".className","#id")           // FASTER
+$("#id").find(".className")     // FASTEST
+```
+
+
 ## References
 
 <b id="f1.1">1. </b>[ camelCase vs under_scores](https://whathecode.wordpress.com/2011/02/10/camelcase-vs-underscores-scientific-showdown/) [↩](#1.1)
@@ -68,3 +117,11 @@ $parent.append($table);
 <b id="f2.1">3. </b>[ Selector caching in jQuery](https://ttmm.io/tech/selector-caching-jquery/) [↩](#2.1)
 
 <b id="f2.2">4. </b>[ jQuery Detach](http://learn.jquery.com/performance/detach-elements-before-work-with-them/) [↩](#2.2)
+
+<b id="f2.3">5. </b>[ Append outside the loop](http://learn.jquery.com/performance/append-outside-loop/) [↩](#2.3)
+
+<b id="f3.1">6. </b>[ Performance Comparison of ID and other Selector](https://jsperf.com/book-selector-tests)
+
+<b id="f3.2">7. </b>[ Performance Comparison of class selectors](https://jsperf.com/jquery-selector-comparison-123)
+
+<b id="f3.3">8. </b>[ Find  vs Context](https://jsperf.com/jquery-find-vs-context-2/13)
