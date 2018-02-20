@@ -5,9 +5,14 @@
 The Purpose of this Style guide is to serve as both an opionionated and un-opionionated guide for medium sized projects which use jQuery extensively. Few pointers can be applied to vannila JS projects too.
 ## Table of Contents
 
-TODO
+1. [Variable Declaration](#Variable-Declaration)
+2. [DOM Manipulation](#DOM-Manipulation)
+3. [Selectors](#Selectors)
+4. [Event Handling](#Event-Handling)
+5. [Code Organization](#Code-Organization)
 
-### 1. Variable Declaration
+
+### <span id="Variable-Declaration">1. Variable Declaration</span>
 
 1.1 Use camelCase for naming the variables. It is easier to type, readable, shorter and concurs with most JS framework conventions
 <sup id="1.1">[1](#f1.1)</sup>
@@ -25,7 +30,7 @@ var firstName = "John",
     company = "Sirius";
 
 ```
-### 2. DOM Manipulation
+### <span id="DOM-Manipulation">2. DOM Manipulation</span>
 
 2.1 Cache jQuery objects if you have to use it repeatedly<sup id="2.1">[3](#f2.1)</sup>. Chain it if possible because most jQuery methods will return the current jQuery object.
 But keep in mind that its better to query and use the element directly in single use scenarios since this would be an overkill.
@@ -86,7 +91,7 @@ $userList.append(userDom);
 
 ```
 
-### 3. Selectors
+###<span id="Selectors"> 3. Selectors</span>
 
 3.1 Leveraging IDs is by far the fastest way to select an element<sup id="3.1">[6](#f3.1)</sup>. Though its not possible in all the cases, its preferable to use them when you can.
 
@@ -109,7 +114,7 @@ $("#id").find(".className")         // FASTEST
 
 3.4 Avoid excess specificity and usage of universal selectors.
 
-### 4. Event Handling
+### <span id="Event-Handling">4. Event Handling</span>
 
 4.1 Using the same anonymous functions in multiple event handlers violates the DRY(Don't repeat yourself) principle. When we have to make modifications we'll have to edit similar code that lives in many different places. A better approach would be to craete a callable function accessible from anywhere<sup id="4.1">[9](#f4.1)</sup>. However it's okay to go for anonymous functions when its not going to be used anywhere else.
 
@@ -161,13 +166,10 @@ $("#user-list").on({
   }
 });
 ```
-### 5. Ajax
 
-Todo
+### <span id="Code-Organization">5. Code Organization</span>
 
-### 6. Code Organization
-
-6.1 Singleton / object literal Pattern
+5.1 Singleton / object literal Pattern
 
 It is a common practice in smaller jQuery projects to wrap the entire JS code within a $document.Ready(). When the size grows, this block will have tens or even hundreds of methods and properties. 
 This problem will further be aggrevated whith multiple js files used in the project, populated with multiple variables.
@@ -207,7 +209,7 @@ $(document).ready(function(){
 });
 ```
 
-6.2 Module Pattern
+5.2 Module Pattern
 
 One downside of using the object literal pattern is it does not offer privacy for variables and functions. Module pattern build upon the singleton pattern by offering privacy through a self-executing anonymous function that returns an object.
 
