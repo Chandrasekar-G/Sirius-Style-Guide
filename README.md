@@ -97,17 +97,72 @@ var $products = $(".products");         // FAST
 ```
 
 3.3 Give a context to your selectors. By default, when you pass a selector into jQuery, it traverses the entire DOM. There’s an underused,
-second possible context argument into jQuery that limits that search to a specifi c section of the
+second possible context argument into jQuery that limits that search to a specific section of the
 DOM. In fact, the best way is to use .find(). Its faster than the context by 40% <sup id="3.3">[8](#f3.3)</sup>
 
 
 ```js
-$(".className");                // SLOW :: This traverses the whole DOM
-$(".className","#id")           // FASTER
-$("#id").find(".className")     // FASTEST
+$(".className");                    // SLOW :: This traverses the whole DOM
+$(".className","#id")               // FASTER
+$("#id").find(".className")         // FASTEST
 ```
 
 3.4 Avoid excess specificity and usage of universal selectors.
+
+### 4. Event Handling
+
+4.1 Using the same anonymous functions in multiple event handlers violates the DRY(Don't repeat yourself) principle. When we have to make modifications we'll have to edit similar code that lives in many different places. A better approach would be to craete a callable function accessible from anywhere<sup id="4.1">[9](#f4.1)</sup>. However it's okay to go for anonymous functions when its not going to be used anywhere else.
+
+<b>Bad</b>
+```js
+$("#user-dialog-box").on("click", function() {
+    // Logic
+});
+$("#guest-dialog-box").on("click", function() {
+    // Same Logic
+});
+```
+
+<b>Good</b>
+```js
+function dialogHandler() {
+    // Logic
+};
+$("#user-dialog-box").on("click", dialogHandler);
+$("#guest-dialog-box").on("click", dialogHandler);
+```
+
+We could further simplify this code by grouping common selectors together,
+```js
+$("#user-dialog-box", "#guest-dialog-box")
+    .on("click", dialogHandler);
+```
+
+4.2 While attaching multiple events to an element, it's more readable to pass an object instead of attaching each of the handlers individually<sup id="4.2">[10](#f4.2)</sup>. 
+
+<b>Bad</b>
+```js
+$("#user-list").on("mouseenter",function(){
+  // mouseenter action
+});
+
+$("#user-list").on("mouseleave",function(){
+  // mouseleave action
+});
+```
+<b>Good</b>
+```js
+$("#user-list").on({
+  "mouseenter": function(){
+    // mouseenter action
+  },
+  "mouseleave": function(){
+    // mouseleave action
+  }
+});
+```
+
+
 
 ## References
 
@@ -126,3 +181,7 @@ $("#id").find(".className")     // FASTEST
 <b id="f3.2">7. </b>[ Performance Comparison of class selectors](https://jsperf.com/jquery-selector-comparison-123) [↩](#3.2)
 
 <b id="f3.3">8. </b>[ Find  vs Context](https://jsperf.com/jquery-find-vs-context-2/13) [↩](#3.3)
+
+<b id="f4.1">9. </b>[ jQuery Events - better approaches](http://lab.abhinayrathore.com/jquery-standards/#Events)  [↩](#4.1)
+
+<b id="f4.2">10. </b>[ Client side jQuery Best practices](https://github.com/holidayextras/culture/blob/master/clientside-jquery-best-practices.md#bad-5)
