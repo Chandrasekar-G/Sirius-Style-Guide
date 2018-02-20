@@ -161,8 +161,92 @@ $("#user-list").on({
   }
 });
 ```
+### 5. Ajax
 
+Todo
 
+### 6. Code Organization
+
+6.1 Singleton / object literal Pattern
+
+It is a common practice in smaller jQuery projects to wrap the entire JS code within a $document.Ready(). When the size grows, this block will have tens or even hundreds of methods and properties. 
+This problem will further be aggrevated whith multiple js files used in the project, populated with multiple variables.
+
+One solution to this is to use a single object literal to contain the properties and variables of a JS file which will act as a namespace to access the methods and properties.
+
+```js
+var userController = {
+    
+    // Variable initialization
+    firstName : "",
+    lastName : "",
+    company : "",
+
+    init : function(){
+        //code to initialize your application
+    },
+
+    listeners: function() {
+        //your listeners will go here
+    },
+
+    getUserDetails: function() {
+        // Logic
+    },
+
+    showUserDetails: function() {
+        // Logic
+    }
+    ...
+    ...
+};
+
+$(document).ready(function(){
+    userController.init();
+    userController.listeners();
+});
+```
+
+6.2 Module Pattern
+
+One downside of using the object literal pattern is it does not offer privacy for variables and functions. Module pattern build upon the singleton pattern by offering privacy through a self-executing anonymous function that returns an object.
+
+```js
+var userController = (function(){
+    var firstName = "",
+        lastName = "",
+        company = "";
+
+    var init = function(){
+        //code to initialize your application
+    },
+
+    var listeners = function() {
+        //your listeners will go here
+    },
+
+    var getUserDetails = function() {
+        // Logic
+    },
+
+    var showUserDetails = function() {
+        // Logic
+    }
+
+    return {
+        init: init,
+        listeners: listeners
+    }
+
+})();
+
+$(document).ready(function() {
+    userController.init();
+    userController.listeners();
+});
+``` 
+
+Here, only the init and listener methods are exposed and the other variables are within the scope of the controller.
 
 ## References
 
@@ -182,6 +266,6 @@ $("#user-list").on({
 
 <b id="f3.3">8. </b>[ Find  vs Context](https://jsperf.com/jquery-find-vs-context-2/13) [↩](#3.3)
 
-<b id="f4.1">9. </b>[ jQuery Events - better approaches](http://lab.abhinayrathore.com/jquery-standards/#Events)  [↩](#4.1)
+<b id="f4.1">9. </b>[ jQuery - Don't repeat yourself](http://learn.jquery.com/code-organization/dont-repeat-yourself/)  [↩](#4.1)
 
 <b id="f4.2">10. </b>[ Client side jQuery Best practices](https://github.com/holidayextras/culture/blob/master/clientside-jquery-best-practices.md#bad-5)
