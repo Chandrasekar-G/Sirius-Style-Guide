@@ -4,15 +4,22 @@
 
 The Purpose of this Style guide is to serve as both an opionionated and un-opionionated guide for medium sized projects which use jQuery extensively. Few pointers can be applied to vannila JS projects too.
 ## Table of Contents
+<!-- TOC -->
 
-1. [Variable Declaration](#Variable-Declaration)
-2. [DOM Manipulation](#DOM-Manipulation)
-3. [Selectors](#Selectors)
-4. [Event Handling](#Event-Handling)
-5. [Code Organization](#Code-Organization)
+- [jQuery Style Guide](#jquery-style-guide)
+    - [Purpose](#purpose)
+    - [Table of Contents](#table-of-contents)
+        - [1. Variable Declaration](#1-variable-declaration)
+        - [2. DOM Manipulation](#2-dom-manipulation)
+        - [3. Selectors](#3-selectors)
+        - [4. Event Handling](#4-event-handling)
+        - [5. Code Organization](#5-code-organization)
+    - [References](#references)
 
+<!-- /TOC -->
 
-### <span id="Variable-Declaration">1. Variable Declaration</span>
+<a name="Variable-Declaration"></a>
+### 1. Variable Declaration
 
 1.1 Use camelCase for naming the variables. It is easier to type, readable, shorter and concurs with most JS framework conventions
 <sup id="1.1">[1](#f1.1)</sup>
@@ -30,7 +37,8 @@ var firstName = "John",
     company = "Sirius";
 
 ```
-### <span id="DOM-Manipulation">2. DOM Manipulation</span>
+<a name="DOM-Manipulation"></a>
+### 2. DOM Manipulation
 
 2.1 Cache jQuery objects if you have to use it repeatedly<sup id="2.1">[3](#f2.1)</sup>. Chain it if possible because most jQuery methods will return the current jQuery object.
 But keep in mind that its better to query and use the element directly in single use scenarios since this would be an overkill.
@@ -91,7 +99,8 @@ $userList.append(userDom);
 
 ```
 
-###<span id="Selectors"> 3. Selectors</span>
+<a name="Selectors"></a>
+### 3. Selectors
 
 3.1 Leveraging IDs is by far the fastest way to select an element<sup id="3.1">[6](#f3.1)</sup>. Though its not possible in all the cases, its preferable to use them when you can.
 
@@ -114,7 +123,8 @@ $("#id").find(".className")         // FASTEST
 
 3.4 Avoid excess specificity and usage of universal selectors.
 
-### <span id="Event-Handling">4. Event Handling</span>
+<a name="Event-Handling"></a>
+### 4. Event Handling
 
 4.1 Using the same anonymous functions in multiple event handlers violates the DRY(Don't repeat yourself) principle. When we have to make modifications we'll have to edit similar code that lives in many different places. A better approach would be to craete a callable function accessible from anywhere<sup id="4.1">[9](#f4.1)</sup>. However it's okay to go for anonymous functions when its not going to be used anywhere else.
 
@@ -167,7 +177,8 @@ $("#user-list").on({
 });
 ```
 
-### <span id="Code-Organization">5. Code Organization</span>
+<a name="Code-Organization"></a>
+### 5. Code Organization
 
 5.1 Singleton / object literal Pattern
 
