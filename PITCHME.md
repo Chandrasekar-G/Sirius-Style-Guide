@@ -3,20 +3,6 @@
 ## Purpose
 
 The Purpose of this Style guide is to serve as both an opionionated and un-opionionated guide for medium sized projects which use jQuery extensively. Few pointers can be applied to vannila JS projects too.
-## Table of Contents
-<!-- TOC -->
-
-- [jQuery Style Guide](#jquery-style-guide)
-    - [Purpose](#purpose)
-    - [Table of Contents](#table-of-contents)
-        - [1. Variable Declaration](#1-variable-declaration)
-        - [2. DOM Manipulation](#2-dom-manipulation)
-        - [3. Selectors](#3-selectors)
-        - [4. Event Handling](#4-event-handling)
-        - [5. Code Organization](#5-code-organization)
-    - [References](#references)
-
-<!-- /TOC -->
 
 <a name="Variable-Declaration"></a>
 ### 1. Variable Declaration
